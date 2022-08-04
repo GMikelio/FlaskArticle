@@ -36,6 +36,7 @@
                   </span>
                 </p>
               </div>
+			  
             </div>
     
             <hr>    
@@ -54,13 +55,17 @@
                     <a class="btn btn-outline-primary" href="{{ url_for('root', page=page_number) }}">{{ page_number }}</a>
                 {% endif %}
     
+
             {% else %}
                 <span>...</span>
             {% endif %}
-    
+ 
     
         {% endfor %}
-    
+		 
+		<a href="#start" title="Αρχή" style="float: right; margin: 5px; font-size: 30px; color: red;">&#11014;</a>
+
+   
     {% endif %}
 
 {% endblock content %}

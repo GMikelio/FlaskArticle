@@ -14,40 +14,76 @@
 
 {% if article %}
 
-        <div class="row my-3 p-3 bg-body rounded shadow-sm">
-          <div class="col col-md-12">
+    <div class="row my-3 p-3 bg-body rounded shadow-sm">
+
+        <div class="col col-md-12">
             {% if article.article_image and article.article_image != 'default_article_image.jpg' %}
               <img src="{{ url_for('static', filename='images/articles_images/'+article.article_image) }}" alt="" class="img-responsive a_image" width="100%">
             {% endif %}
-          </div>
-          <div class="col col-md-12">
+        </div>
+        <div class="col col-md-12">
             <div class="main-article-title">
               {{ article.article_title | safe }}
             </div>
+			
             <small class="article_date">[{{ article.date_created.strftime('%d-%m-%Y') }}]</small>
 
-
-          <div>
-            {% if article.author == current_user %}
-              <a class="btn btn-primary btn-sm mt-1 mb-1" href="{{ url_for('edit_article', article_id=article.id) }}">Αλλαγή</a>
-              <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Διαγραφή</button>
-            {% endif %}
-          </div>
-
+            <div>
+              {% if article.author == current_user %}
+                <a class="btn btn-primary btn-sm mt-1 mb-1" href="{{ url_for('edit_article', article_id=article.id) }}">Αλλαγή</a>
+                <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Διαγραφή</button>
+              {% endif %}
+            </div>
 
 
             <p class="main-article-partial-text">
               {{ article.article_body | safe }}
             </p>
+			
+			
             <p class="">Από 
-              <span>
-                <a class="author-name" href="{{ url_for('articles_by_author', author_id=article.author.id) }}"> {{ article.author.username }}
-                  <img class="rounded-circle profile-image" alt="{{ article.author.username }}" src="{{ url_for('static', filename='images/profiles_images/'+article.author.profile_image) }}" data-holder-rendered="true" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ article.author.username }}">
-                </a>
-              </span>
+                <span>
+                    <a class="author-name" href="{{ url_for('articles_by_author', author_id=article.author.id) }}"> {{ article.author.username }}
+                      <img class="rounded-circle profile-image" alt="{{ article.author.username }}" 
+					       src="{{ url_for('static', filename='images/profiles_images/'+article.author.profile_image) }}" 
+						   data-holder-rendered="true" data-bs-toggle="tooltip" data-bs-placement="top" 
+						   title="{{ article.author.username }}">
+                    </a>
+                </span>
+				
+				<!-- 
+				<span style='float: right; border: none; font-size:24px;'> 👍 </span>
+				<span style='float: right; border: none; font-size:24px;'> 💬 </span>
+				   -->
+				   <a href="#start" title="Αρχή" style="float: right; margin: 5px; font-size: 30px;">&#11014;</a>
             </p>
-          </div>
+			
+				
+            <!-- <div class="justify-content-left">   -->
+            <div class="text-center">
+			<!-- <span style='font-size:35px;'>💬</span>   -->  
+				
+				<button type="button" class="btn btn-outline-secondary btn-lg" data-bs-target="#demo1">
+				    <span style='border: none; font-size:24px;'> 👍 </span><!--   Μου Αρέσει  -->
+				</button>
+				 &nbsp;&nbsp;&nbsp;
+				<button type="button" class="btn btn-outline-secondary btn-lg" data-bs-toggle="collapse" data-bs-target="#demo2">
+				    <span style='border: none; font-size:24px;'> 💬 </span><!--   Σχόλιο  -->
+				</button>
+	
+				<div id="demo2" class="collapse w3-light-grey">
+				    <textarea placeholder="Σχολιάστε..." style='margin: 5px 0px;' rows="3" cols="60" autofocus>
+				    </textarea>
+				</div>
+				
+	            <!-- <a href="#start" title="Αρχή" style="float: right; margin: 5px; font-size: 30px;">&#11014;</a>  -->
+				
+            </div>
+			
+			<hr>
+		
         </div>
+    </div>
 
 {% endif %}
 

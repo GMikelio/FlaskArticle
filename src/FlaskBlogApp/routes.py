@@ -20,20 +20,20 @@ from PIL import Image
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
+    """ note that we set the 404 status explicitly """
     return render_template('errors/404.html'), 404
 
 
 @app.errorhandler(415)
 def unsupported_media_type(e):
-    # note that we set the 415 status explicitly
+    """ note that we set the 415 status explicitly """
     return render_template('errors/415.html'), 415
 
 
 
 
-# To size είναι ένα tuple της μορφής (640, 480)
 def image_save(image, where, size):
+    """ To size είναι ένα tuple της μορφής (640, 480) """
     random_filename = secrets.token_hex(12)
     file_name, file_extension = os.path.splitext(image.filename)
     image_filename = random_filename + file_extension
@@ -56,7 +56,6 @@ def root():
     page = request.args.get("page", 1, type=int)
     articles = Article.query.order_by(Article.date_created.desc()).paginate(per_page=5, page=page)
     return render_template("index.html", articles=articles)
-
 
 
 @app.route("/articles_by_author/<int:author_id>")
@@ -263,3 +262,9 @@ def edit_article(article_id):
         return redirect(url_for('root'))
 
     return render_template("new_article.html", form=form, page_title="Επεξεργασία Άρθρου")
+
+
+@app.route("/about/", methods=["GET"])
+def about():
+
+    return render_template("about.html", page_title="Περί του ιστοχώρου αυτού")

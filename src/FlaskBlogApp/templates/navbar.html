@@ -1,10 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
+  <div class="container-fluid" id=start>
+  
     <a class="navbar-brand" href="/"><font color="orange"><i>MyBlog</i></font> </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+	
     <div class="collapse navbar-collapse" id="navbarNav">
+	
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/"><strong> Αρχική Σελίδα </strong></a>
@@ -12,7 +15,11 @@
         <li class="nav-item">
           <a class="nav-link" href="/new_article/"><strong> Νέο Άρθρο </strong></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about/"><strong> Περί </strong></a>
+        </li>
       </ul>
+	  
       <ul class="nav navbar-nav navbar-right">
 
         {% if current_user.is_authenticated %}
@@ -23,7 +30,7 @@
               <img class="rounded-circle navbar-profile-image" src="{{ url_for('static', filename='images/profiles_images/'+current_user.profile_image) }}" alt="{{ current_user.username }}" data-holder-rendered="true" data-bs-toggle="tooltip" data-bs-placement="top", title="{{ current_user.username }}" >
             </a>
             
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             
               <li>
                 <a class="dropdown-item" href="/account/"><strong> {{ current_user.username }} </strong></a>
